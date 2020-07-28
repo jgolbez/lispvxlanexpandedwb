@@ -1,0 +1,319 @@
+!
+! Last configuration change at 10:37:32 UTC Wed Jul 22 2020
+!
+version 16.10
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service call-home
+platform qfp utilization monitor load 80
+no platform punt-keepalive disable-kernel-core
+platform console serial
+!
+hostname Site1-Edge1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+vrf definition 1010_USER1
+ rd 1010:1010
+ !
+ address-family ipv4
+  route-target export 1010:1010
+  route-target import 1010:1010
+ exit-address-family
+!
+!
+no aaa new-model
+call-home
+ ! If contact email address in call-home is configured as sch-smart-licensing@cisco.com
+ ! the email address configured in Cisco Smart License Portal will be used as contact email address to send SCH notifications.
+ contact-email-addr sch-smart-licensing@cisco.com
+ profile "CiscoTAC-1"
+  active
+  destination transport-method http
+  no destination transport-method email
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+login on-success log
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+! 
+! 
+! 
+! 
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+crypto pki trustpoint TP-self-signed-216792748
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-216792748
+ revocation-check none
+ rsakeypair TP-self-signed-216792748
+!
+crypto pki trustpoint SLA-TrustPoint
+ enrollment pkcs12
+ revocation-check crl
+!
+!
+crypto pki certificate chain TP-self-signed-216792748
+ certificate self-signed 01
+  3082032E 30820216 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+  30312E30 2C060355 04031325 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 32313637 39323734 38301E17 0D323030 36303331 32313935 
+  315A170D 33303031 30313030 30303030 5A303031 2E302C06 03550403 1325494F 
+  532D5365 6C662D53 69676E65 642D4365 72746966 69636174 652D3231 36373932 
+  37343830 82012230 0D06092A 864886F7 0D010101 05000382 010F0030 82010A02 
+  82010100 EAFE5021 C19E0260 074841A9 E60A4190 8B33A49E B460319A BCA4230D 
+  015445DA 40E9656A CD4AAF77 FCC42C2B 9FA62DB8 53CBCC47 06393DA6 EB65842F 
+  A0ED0873 EBC908E5 D07F3190 A6F84960 0B266010 8DA0DE62 99EB30E2 2A571AE4 
+  060E95A3 B7AC8F4F 09B228C8 B3A91602 131B20CE 849944B3 2399250D A1F0A122 
+  D148C46D CDE59331 530D2330 9A8176F8 96CBCA13 2BEFC106 7CAD7CAE 0AA83134 
+  85943944 889E7569 AA5D8F10 CE254AA0 8A6FD480 C5CC3048 544B90EB D8825EAE 
+  30819634 9CDD57DE 8C390427 24D0BEE9 E816C3E7 81DEA2F6 8E076A75 2F62FEC8 
+  4CE4A13B A4270BC5 1FD64F48 3B7AB684 CC13FF43 C7D1D599 8867DCD4 A39397C1 
+  11CF39DF 02030100 01A35330 51300F06 03551D13 0101FF04 05300301 01FF301F 
+  0603551D 23041830 168014DF CF55942D A48E3E50 38535D01 C0E115D4 746D1430 
+  1D060355 1D0E0416 0414DFCF 55942DA4 8E3E5038 535D01C0 E115D474 6D14300D 
+  06092A86 4886F70D 01010505 00038201 01001B41 B5B6F5EA 56677CFE 2FE99083 
+  29007D60 1DB97ABA 991DC5EB 21AACB9D 0185AD58 F6EE92D6 75044243 80AFA686 
+  89A3BD79 9D14D4CF B17ECA6E A0285662 95A48809 7F03058E A72815BA DF6101CD 
+  8355F148 CFF47467 11AC0BFB F99960DF 2D7C9DBE 0DC329A8 FA3B7314 183DA3D9 
+  51221CD9 26BB68DC 19FDBFB6 6C22408D 67E89AED E56D4265 24D48786 3B0D9AE2 
+  F87EAA36 33D2A466 52058EE9 F8C10785 CEC9C5F9 A0A5C9D1 902479D8 B5E6A611 
+  8C16D7BA D60594C2 02EAFF9D 418476CE A9FEB8E6 F959C80F 35264B6C 9B0E62E7 
+  E2C2BAB3 B259E447 91CDE6D8 B9514970 EDB2D139 D8F72A24 536688A1 8A31D03A 
+  9979C1E7 6EB26266 CB617BA3 9A8D551C 5C44
+  quit
+crypto pki certificate chain SLA-TrustPoint
+ certificate ca 01
+  30820321 30820209 A0030201 02020101 300D0609 2A864886 F70D0101 0B050030 
+  32310E30 0C060355 040A1305 43697363 6F312030 1E060355 04031317 43697363 
+  6F204C69 63656E73 696E6720 526F6F74 20434130 1E170D31 33303533 30313934 
+  3834375A 170D3338 30353330 31393438 34375A30 32310E30 0C060355 040A1305 
+  43697363 6F312030 1E060355 04031317 43697363 6F204C69 63656E73 696E6720 
+  526F6F74 20434130 82012230 0D06092A 864886F7 0D010101 05000382 010F0030 
+  82010A02 82010100 A6BCBD96 131E05F7 145EA72C 2CD686E6 17222EA1 F1EFF64D 
+  CBB4C798 212AA147 C655D8D7 9471380D 8711441E 1AAF071A 9CAE6388 8A38E520 
+  1C394D78 462EF239 C659F715 B98C0A59 5BBB5CBD 0CFEBEA3 700A8BF7 D8F256EE 
+  4AA4E80D DB6FD1C9 60B1FD18 FFC69C96 6FA68957 A2617DE7 104FDC5F EA2956AC 
+  7390A3EB 2B5436AD C847A2C5 DAB553EB 69A9A535 58E9F3E3 C0BD23CF 58BD7188 
+  68E69491 20F320E7 948E71D7 AE3BCC84 F10684C7 4BC8E00F 539BA42B 42C68BB7 
+  C7479096 B4CB2D62 EA2F505D C7B062A4 6811D95B E8250FC4 5D5D5FB8 8F27D191 
+  C55F0D76 61F9A4CD 3D992327 A8BB03BD 4E6D7069 7CBADF8B DF5F4368 95135E44 
+  DFC7C6CF 04DD7FD1 02030100 01A34230 40300E06 03551D0F 0101FF04 04030201 
+  06300F06 03551D13 0101FF04 05300301 01FF301D 0603551D 0E041604 1449DC85 
+  4B3D31E5 1B3E6A17 606AF333 3D3B4C73 E8300D06 092A8648 86F70D01 010B0500 
+  03820101 00507F24 D3932A66 86025D9F E838AE5C 6D4DF6B0 49631C78 240DA905 
+  604EDCDE FF4FED2B 77FC460E CD636FDB DD44681E 3A5673AB 9093D3B1 6C9E3D8B 
+  D98987BF E40CBD9E 1AECA0C2 2189BB5C 8FA85686 CD98B646 5575B146 8DFC66A8 
+  467A3DF4 4D565700 6ADF0F0D CF835015 3C04FF7C 21E878AC 11BA9CD2 55A9232C 
+  7CA7B7E6 C1AF74F6 152E99B7 B1FCF9BB E973DE7F 5BDDEB86 C71E3B49 1765308B 
+  5FB0DA06 B92AFE7F 494E8A9E 07B85737 F3A58BE1 1A48A229 C37C1E69 39F08678 
+  80DDCD16 D6BACECA EEBC7CF9 8428787B 35202CDC 60E4616A B623CDBD 230E3AFB 
+  418616A9 4093E049 4D10AB75 27E86F73 932E35B5 8862FDAE 0275156F 719BB2F0 
+  D697DF7F 28
+  quit
+!
+license udi pid CSR1000V sn 93CJDYFFY7Q
+diagnostic bootup level minimal
+!
+spanning-tree extend system-id
+!
+!
+!
+!
+redundancy
+!
+!
+!
+!
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+! 
+! 
+!
+!
+interface Loopback0
+ no shutdown
+ description RLOC FOR LISP/VXLAN
+ ip address 11.11.11.11 255.255.255.255
+ ip router isis 
+!
+interface LISP0
+ no shutdown
+!
+interface LISP0.1010
+ no shutdown
+!
+interface GigabitEthernet1
+ no shutdown
+ description SITE1-1010-USERS
+ mac-address 1010.1010.1010
+ vrf forwarding 1010_USER1
+ ip address 10.10.1.1 255.255.255.0
+ no ip redirects
+ ip local-proxy-arp
+ ip route-cache same-interface
+ negotiation auto
+ lisp mobility 10-10-1-0_USER1
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet2
+ no shutdown
+ description LINK TO UNDERLAY
+ ip address 192.168.100.5 255.255.255.252
+ no ip redirects
+ ip local-proxy-arp
+ ip lisp source-locator Loopback0
+ ip router isis 
+ ip route-cache same-interface
+ negotiation auto
+ no mop enabled
+ no mop sysid
+ isis network point-to-point 
+!
+interface GigabitEthernet3
+ no shutdown
+ description SITE1-1020-HR
+ mac-address 2020.2020.2020
+ ip address 10.20.1.1 255.255.255.0
+ no ip redirects
+ ip local-proxy-arp
+ ip route-cache same-interface
+ negotiation auto
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet4
+ no shutdown
+ description SITE1-1099-INFRA
+ mac-address 9090.9090.9090
+ ip address 10.99.1.1 255.255.255.0
+ no ip redirects
+ ip local-proxy-arp
+ ip route-cache same-interface
+ negotiation auto
+ lisp mobility 10-99-0-0_INFRA
+ no mop enabled
+ no mop sysid
+!
+router lisp
+ locator-table default
+ locator-set RLOC-EDGE1
+  IPv4-interface Loopback0 priority 1 weight 100
+  exit-locator-set
+ !
+ locator default-set RLOC-EDGE1
+ service ipv4
+  encapsulation vxlan
+  itr map-resolver 10.10.10.10
+  itr
+  etr map-server 10.10.10.10 key cisco123
+  etr map-server 10.10.10.10 proxy-reply
+  etr
+  use-petr 10.10.10.10
+  exit-service-ipv4
+ !
+ instance-id 0
+  remote-rloc-probe on-route-change
+  dynamic-eid 10-99-0-0_INFRA
+   database-mapping 10.99.1.0/24 locator-set RLOC-EDGE1
+   exit-dynamic-eid
+  !
+  service ipv4
+   eid-table default
+   map-cache 0.0.0.0/0 map-request
+   exit-service-ipv4
+  !
+  exit-instance-id
+ !
+ instance-id 1010
+  remote-rloc-probe on-route-change
+  dynamic-eid 10-10-1-0_USER1
+   database-mapping 10.10.1.0/24 locator-set RLOC-EDGE1
+   exit-dynamic-eid
+  !
+  service ipv4
+   eid-table vrf 1010_USER1
+   map-cache 0.0.0.0/0 map-request
+   exit-service-ipv4
+  !
+  exit-instance-id
+ !
+ exit-router-lisp
+!
+router isis
+ net 49.0001.0110.1101.1011.00
+ is-type level-2-only
+ domain-password cisco123
+ metric-style wide
+ log-adjacency-changes
+!
+ip forward-protocol nd
+ip http server
+ip http authentication local
+ip http secure-server
+!
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+line con 0
+ stopbits 1
+line vty 0 4
+ login
+!
+!
+!
+!
+!
+!
+end

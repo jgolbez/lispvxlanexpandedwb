@@ -1,0 +1,289 @@
+!
+! Last configuration change at 20:36:58 UTC Tue Jul 21 2020
+!
+version 16.10
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service call-home
+platform qfp utilization monitor load 80
+no platform punt-keepalive disable-kernel-core
+platform console serial
+!
+hostname Site2-Edge2
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+call-home
+ ! If contact email address in call-home is configured as sch-smart-licensing@cisco.com
+ ! the email address configured in Cisco Smart License Portal will be used as contact email address to send SCH notifications.
+ contact-email-addr sch-smart-licensing@cisco.com
+ profile "CiscoTAC-1"
+  active
+  destination transport-method http
+  no destination transport-method email
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+login on-success log
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+! 
+! 
+! 
+! 
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+crypto pki trustpoint TP-self-signed-1417605741
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-1417605741
+ revocation-check none
+ rsakeypair TP-self-signed-1417605741
+!
+crypto pki trustpoint SLA-TrustPoint
+ enrollment pkcs12
+ revocation-check crl
+!
+!
+crypto pki certificate chain TP-self-signed-1417605741
+ certificate self-signed 01
+  30820330 30820218 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 31343137 36303537 3431301E 170D3230 30363033 31323237 
+  31375A17 0D333030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D31 34313736 
+  30353734 31308201 22300D06 092A8648 86F70D01 01010500 0382010F 00308201 
+  0A028201 01009555 803B0F5E 3D080E5C 0097BB75 1C83FB6B 5C68202C 6913E221 
+  54672C00 6943AE59 328290D0 4EAC9EEC 7B5984A1 B39ADD60 6C766F3F C19AA492 
+  55EF544A EB68EB00 5FC4E37A 3EB23A63 0F9F1D14 922C04AC ABC9CF39 0F0201E5 
+  E0547D20 4D84C3B6 A44BABBF F15CBFA6 65BA95E6 01A574E5 0270D6BA FBBDC78F 
+  F5AE9144 D9F82AC4 2C186415 A92698C8 A4CECE4D 0D1A94A6 F9311CF3 DBA4EA08 
+  EFAF6682 847F7AA6 9FA6265C D579FC79 0C73211E C6B7AB1E F5546891 B34426C4 
+  F0642897 0E9FC1E9 9A7959F0 B8B1EE3C 2CA91226 C9C1FA6C E088ADF2 D31ED7FF 
+  16C27660 9086B25F 6ADBACDA 63D851D3 513CFB61 05348E37 3DA6331F 44C643BF 
+  3C5A4D8B F0D90203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 
+  301F0603 551D2304 18301680 141EF5BB C56B0BE9 799FB0DC 279547E8 8140F498 
+  8C301D06 03551D0E 04160414 1EF5BBC5 6B0BE979 9FB0DC27 9547E881 40F4988C 
+  300D0609 2A864886 F70D0101 05050003 82010100 58969B9C B9F7E0DB 6AA21670 
+  F049F8A5 DF32FE73 536A89BA 004174C1 AC1A95C5 DED16F5F 53D0E2CD D6987179 
+  776EE225 0F41210C 30CA78E0 F4039E39 0424E3E1 8A48AB7A 24B0A97F 63AC2FCB 
+  F022D7DB 46C7D842 BA44CBD3 786E3A0D 9BAEE0FA 030490AC 296A7827 370AE9C6 
+  B0E992AA E19AA995 6F0F40D8 4399B87E 8BD8C7F2 A11CAC93 C9325EBA 33F7EE01 
+  D6E16093 3CCF8E6E 749ADC02 BE80B751 280B1379 394D8E25 4B9A21E4 C2BD8F1D 
+  D10F7EA8 8F1F7A14 074898DB 188D8985 B77B1A58 1837A1F2 1FA6E972 E8783E5D 
+  9BBA73F8 7A1C7CFF 2EA08575 63492331 0DEF473D BEA8343D 06ECDBAE 8EDD8C16 
+  D36CD137 41907F9E 09AB9173 5710A9DE A30F0DD3
+  quit
+crypto pki certificate chain SLA-TrustPoint
+ certificate ca 01
+  30820321 30820209 A0030201 02020101 300D0609 2A864886 F70D0101 0B050030 
+  32310E30 0C060355 040A1305 43697363 6F312030 1E060355 04031317 43697363 
+  6F204C69 63656E73 696E6720 526F6F74 20434130 1E170D31 33303533 30313934 
+  3834375A 170D3338 30353330 31393438 34375A30 32310E30 0C060355 040A1305 
+  43697363 6F312030 1E060355 04031317 43697363 6F204C69 63656E73 696E6720 
+  526F6F74 20434130 82012230 0D06092A 864886F7 0D010101 05000382 010F0030 
+  82010A02 82010100 A6BCBD96 131E05F7 145EA72C 2CD686E6 17222EA1 F1EFF64D 
+  CBB4C798 212AA147 C655D8D7 9471380D 8711441E 1AAF071A 9CAE6388 8A38E520 
+  1C394D78 462EF239 C659F715 B98C0A59 5BBB5CBD 0CFEBEA3 700A8BF7 D8F256EE 
+  4AA4E80D DB6FD1C9 60B1FD18 FFC69C96 6FA68957 A2617DE7 104FDC5F EA2956AC 
+  7390A3EB 2B5436AD C847A2C5 DAB553EB 69A9A535 58E9F3E3 C0BD23CF 58BD7188 
+  68E69491 20F320E7 948E71D7 AE3BCC84 F10684C7 4BC8E00F 539BA42B 42C68BB7 
+  C7479096 B4CB2D62 EA2F505D C7B062A4 6811D95B E8250FC4 5D5D5FB8 8F27D191 
+  C55F0D76 61F9A4CD 3D992327 A8BB03BD 4E6D7069 7CBADF8B DF5F4368 95135E44 
+  DFC7C6CF 04DD7FD1 02030100 01A34230 40300E06 03551D0F 0101FF04 04030201 
+  06300F06 03551D13 0101FF04 05300301 01FF301D 0603551D 0E041604 1449DC85 
+  4B3D31E5 1B3E6A17 606AF333 3D3B4C73 E8300D06 092A8648 86F70D01 010B0500 
+  03820101 00507F24 D3932A66 86025D9F E838AE5C 6D4DF6B0 49631C78 240DA905 
+  604EDCDE FF4FED2B 77FC460E CD636FDB DD44681E 3A5673AB 9093D3B1 6C9E3D8B 
+  D98987BF E40CBD9E 1AECA0C2 2189BB5C 8FA85686 CD98B646 5575B146 8DFC66A8 
+  467A3DF4 4D565700 6ADF0F0D CF835015 3C04FF7C 21E878AC 11BA9CD2 55A9232C 
+  7CA7B7E6 C1AF74F6 152E99B7 B1FCF9BB E973DE7F 5BDDEB86 C71E3B49 1765308B 
+  5FB0DA06 B92AFE7F 494E8A9E 07B85737 F3A58BE1 1A48A229 C37C1E69 39F08678 
+  80DDCD16 D6BACECA EEBC7CF9 8428787B 35202CDC 60E4616A B623CDBD 230E3AFB 
+  418616A9 4093E049 4D10AB75 27E86F73 932E35B5 8862FDAE 0275156F 719BB2F0 
+  D697DF7F 28
+  quit
+!
+license udi pid CSR1000V sn 93LRY8N41IV
+diagnostic bootup level minimal
+!
+spanning-tree extend system-id
+!
+!
+!
+!
+redundancy
+!
+!
+!
+!
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+! 
+! 
+!
+!
+interface Loopback0
+ no shutdown
+ description RLOC FOR LISP/VXLAN
+ ip address 22.22.22.22 255.255.255.255
+ ip router isis 
+!
+interface LISP0
+ no shutdown
+!
+interface GigabitEthernet1
+ no shutdown
+ description SITE2-1030-USERS2
+ mac-address 3030.3030.3030
+ ip address 10.30.1.1 255.255.255.0
+ no ip redirects
+ ip local-proxy-arp
+ ip route-cache same-interface
+ negotiation auto
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet2
+ no shutdown
+ description LINK TO SITE2-UNDERLAY
+ ip address 192.168.200.14 255.255.255.252
+ ip lisp source-locator Loopback0
+ ip router isis 
+ negotiation auto
+ no mop enabled
+ no mop sysid
+ isis network point-to-point 
+!
+interface GigabitEthernet3
+ no shutdown
+ description SITE2-1040-SEC
+ mac-address 4040.4040.4040
+ ip address 10.40.1.1 255.255.255.0
+ no ip redirects
+ ip local-proxy-arp
+ ip route-cache same-interface
+ negotiation auto
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet4
+ no shutdown
+ description SITE2-1099-INFRA
+ mac-address 9090.9090.9090
+ ip address 10.99.2.1 255.255.255.0
+ no ip redirects
+ ip local-proxy-arp
+ ip route-cache same-interface
+ negotiation auto
+ lisp mobility 10-99-0-0_INFRA
+ no mop enabled
+ no mop sysid
+!
+router lisp
+ locator-table default
+ locator-set RLOC-EDGE2
+  IPv4-interface Loopback0 priority 1 weight 100
+  exit-locator-set
+ !
+ locator default-set RLOC-EDGE2
+ service ipv4
+  encapsulation vxlan
+  itr map-resolver 20.20.20.20
+  itr
+  etr map-server 20.20.20.20 key cisco123
+  etr map-server 20.20.20.20 proxy-reply
+  etr
+  use-petr 20.20.20.20
+  exit-service-ipv4
+ !
+ instance-id 0
+  dynamic-eid 10-99-0-0_INFRA
+   database-mapping 10.99.2.0/24 locator-set RLOC-EDGE2
+   exit-dynamic-eid
+  !
+  service ipv4
+   eid-table default
+   map-cache 0.0.0.0/0 map-request
+   exit-service-ipv4
+  !
+  exit-instance-id
+ !
+ exit-router-lisp
+!
+router isis
+ net 49.0002.0220.2202.2022.00
+ is-type level-2-only
+ domain-password cisco123
+ metric-style wide
+ log-adjacency-changes
+!
+ip forward-protocol nd
+ip http server
+ip http authentication local
+ip http secure-server
+!
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+line con 0
+ stopbits 1
+line vty 0 4
+ login
+!
+!
+!
+!
+!
+!
+end
