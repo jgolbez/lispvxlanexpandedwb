@@ -188,6 +188,7 @@ interface GigabitEthernet1
  no shutdown
  description SITE1-1010-USERS
  mac-address 1010.1010.1010
+ vrf forwarding 1010_USER1
  ip address 10.10.1.1 255.255.255.0
  no ip redirects
  ip local-proxy-arp
